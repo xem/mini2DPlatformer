@@ -88,7 +88,7 @@ setInterval(() => {
   
   // Get the value of the tiles at the bottom corners of the hero
   tile1 = map[Math.floor(hero_y + hero_h)][Math.floor(hero_x)];
-  tile2 = map[Math.floor(hero_y + hero_h)][Math.floor(hero_x + hero_w - .1)];
+  tile2 = map[Math.floor(hero_y + hero_h)][Math.floor(hero_x + hero_w - .01)];
   
   // If this tile is solid, put the hero on top of it (he's grounded)
   if(tile1 == 1 || tile2 == 1){
@@ -103,7 +103,7 @@ setInterval(() => {
   
     // Get the value of the tiles at the top corners of the hero
     tile1 = map[Math.floor(hero_y)][Math.floor(hero_x)];
-    tile2 = map[Math.floor(hero_y)][Math.floor(hero_x + hero_w - .1)];
+    tile2 = map[Math.floor(hero_y)][Math.floor(hero_x + hero_w - .01)];
     
     // If this tile is solid, put the hero on the bottom side of it and make him fall
     if(tile1 == 1 || tile2 == 1){

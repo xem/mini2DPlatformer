@@ -14,7 +14,7 @@ map = [
 "0000000000000000000000000000000000000000",
 "0000000000000000000000000000000000000000",
 "0000000000000100000000000000000000000000",
-"0000000000000000000000000000000000000000",
+"0000000000000000000011100000000000000000",
 "0000000000010101000000000001001000000000",
 "0000000000000000000000000011001100000000",
 "0000000000000000000000000111001110000000",
@@ -98,6 +98,20 @@ setInterval(() => {
     hero_ay = 0;
   }
   
+  // If moving up
+  if(hero_vy < 0){
+  
+    // Get the value of the tiles at the top corners of the hero
+    tile1 = map[Math.floor(hero_y)][Math.floor(hero_x)];
+    tile2 = map[Math.floor(hero_y)][Math.floor(hero_x + hero_w - .1)];
+    
+    // If this tile is solid, put the hero on the bottom side of it and make him fall
+    if(tile1 == 1 || tile2 == 1){
+      hero_y = Math.ceil(hero_y);
+      hero_vy = 0;
+    }
+  }
+  
   // If left key is pressed, go left
   if(l){
     hero_x -= .1;
@@ -137,20 +151,6 @@ setInterval(() => {
   // If up key is released, allow hero to jump again next time he's grounded
   if(!u){
     hero_canjump = 1;
-  }
-  
-  // If moving up
-  if(hero_vy < 0){
-  
-    // Get the value of the tiles at the top corners of the hero
-    tile1 = map[Math.floor(hero_y)][Math.floor(hero_x)];
-    tile2 = map[Math.floor(hero_y)][Math.floor(hero_x + hero_w - .1)];
-    
-    // If this tile is solid, put the hero on the bottom side of it and make him fall
-    if(tile1 == 1 || tile2 == 1){
-      hero_y = Math.ceil(hero_y);
-      hero_vy = 0;
-    }
   }
   
   // Compute scroll

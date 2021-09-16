@@ -14,7 +14,7 @@ map = [
 "0000000000000000000000000000000000000000",
 "0000000000000000000000000000000000000000",
 "0000000000000100000000000000000000000000",
-"0000000000000000000000000000000000000000",
+"0000000000000000000011100000000000000000",
 "0000000000010101000000000001001000000000",
 "0000000000000000000000000011001100000000",
 "0000000000000000000000000111001110000000",
@@ -42,7 +42,7 @@ tile1 = null;
 tile2 = null;
 
 // World
-g = 0.001;    // gravity in tiles/frame²
+g = 0.0095;    // gravity in tiles/frame²
 scroll_x = 0; // X scroll in tiles
 
 // Inputs (see https://xem.github.io/articles/jsgamesinputs.html)
@@ -71,8 +71,8 @@ setInterval(() => {
   // Reset grounded state
   hero_grounded = 0;
   
-  // Apply gravity to Y acceleration, Y acceleration to Y speed and Y speed to Y position
-  hero_ay += g;
+  // Apply gravity to Y speed, Y acceleration to Y speed and Y speed to Y position
+  hero_vy += g;
   hero_vy += hero_ay;
   hero_y += hero_vy;
   
@@ -88,7 +88,7 @@ setInterval(() => {
   
   // Get the value of the tiles at the bottom corners of the hero
   tile1 = map[Math.floor(hero_y + hero_h)][Math.floor(hero_x)];
-  tile2 = map[Math.floor(hero_y + hero_h)][Math.floor(hero_x + hero_w - .1)];
+  tile2 = map[Math.floor(hero_y + hero_h)][Math.floor(hero_x + hero_w - .01)];
   
   // If this tile is solid, put the hero on top of it (he's grounded)
   if(tile1 == 1 || tile2 == 1){
@@ -96,6 +96,20 @@ setInterval(() => {
     hero_grounded = 1;
     hero_vy = 0;
     hero_ay = 0;
+  }
+  
+  // If moving up
+  if(hero_vy < 0){
+  
+    // Get the value of the tiles at the top corners of the hero
+    tile1 = map[Math.floor(hero_y)][Math.floor(hero_x)];
+    tile2 = map[Math.floor(hero_y)][Math.floor(hero_x + hero_w - .01)];
+    
+    // If this tile is solid, put the hero on the bottom side of it and make him fall
+    if(tile1 == 1 || tile2 == 1){
+      hero_y = Math.ceil(hero_y);
+      hero_vy = 0;
+    }
   }
   
   // If left key is pressed, go left
@@ -137,20 +151,6 @@ setInterval(() => {
   // If up key is released, allow hero to jump again next time he's grounded
   if(!u){
     hero_canjump = 1;
-  }
-  
-  // If moving up
-  if(hero_vy < 0){
-  
-    // Get the value of the tiles at the top corners of the hero
-    tile1 = map[Math.floor(hero_y)][Math.floor(hero_x)];
-    tile2 = map[Math.floor(hero_y)][Math.floor(hero_x + hero_w - .1)];
-    
-    // If this tile is solid, put the hero on the bottom side of it and make him fall
-    if(tile1 == 1 || tile2 == 1){
-      hero_y = Math.ceil(hero_y);
-      hero_vy = 0;
-    }
   }
   
   // Compute scroll

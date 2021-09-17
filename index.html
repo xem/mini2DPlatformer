@@ -87,12 +87,12 @@ setInterval(() => {
   }
   
   // Get the value of the tiles at the bottom corners of the hero
-  tile1 = map[Math.floor(hero_y + hero_h)][Math.floor(hero_x)];
-  tile2 = map[Math.floor(hero_y + hero_h)][Math.floor(hero_x + hero_w - .01)];
+  tile1 = map[~~(hero_y + hero_h)][~~(hero_x)];
+  tile2 = map[~~(hero_y + hero_h)][~~(hero_x + hero_w - .01)];
   
   // If this tile is solid, put the hero on top of it (he's grounded)
   if(tile1 == 1 || tile2 == 1){
-    hero_y = Math.floor(hero_y + hero_h) - hero_h;
+    hero_y = ~~(hero_y + hero_h) - hero_h;
     hero_grounded = 1;
     hero_vy = 0;
     hero_ay = 0;
@@ -102,8 +102,8 @@ setInterval(() => {
   if(hero_vy < 0){
   
     // Get the value of the tiles at the top corners of the hero
-    tile1 = map[Math.floor(hero_y)][Math.floor(hero_x)];
-    tile2 = map[Math.floor(hero_y)][Math.floor(hero_x + hero_w - .01)];
+    tile1 = map[~~(hero_y)][~~(hero_x)];
+    tile2 = map[~~(hero_y)][~~(hero_x + hero_w - .01)];
     
     // If this tile is solid, put the hero on the bottom side of it and make him fall
     if(tile1 == 1 || tile2 == 1){
@@ -118,8 +118,8 @@ setInterval(() => {
     hero_x = Math.max(hero_x, 0);
   
     // Get the value of the tiles at the left corners of the hero
-    tile1 = map[Math.floor(hero_y)][Math.floor(hero_x)];
-    tile2 = map[Math.floor(hero_y + hero_h - .1)][Math.floor(hero_x)];
+    tile1 = map[~~(hero_y)][~~(hero_x)];
+    tile2 = map[~~(hero_y + hero_h - .1)][~~(hero_x)];
     
     // If this tile is solid, put the hero on the right side of it
     if(tile1 == 1 || tile2 == 1){
@@ -133,12 +133,12 @@ setInterval(() => {
     hero_x = Math.min(map_w - 1, hero_x);
   
     // Get the value of the tiles at the left corners of the hero
-    tile1 = map[Math.floor(hero_y)][Math.floor(hero_x + hero_w)];
-    tile2 = map[Math.floor(hero_y + hero_h - .1)][Math.floor(hero_x + hero_w)];
+    tile1 = map[~~(hero_y)][~~(hero_x + hero_w)];
+    tile2 = map[~~(hero_y + hero_h - .1)][~~(hero_x + hero_w)];
     
     // If this tile is solid, put the hero on the right side of it
     if(tile1 == 1 || tile2 == 1){
-      hero_x = Math.floor(hero_x + hero_w) - hero_w;
+      hero_x = ~~(hero_x + hero_w) - hero_w;
     }
   }
   

@@ -42,7 +42,8 @@ tile1 = null;
 tile2 = null;
 
 // World
-g = 0.0095;    // gravity in tiles/frame²
+g1 = .0095;    // gravity in tiles/frame²
+g2 = .015;    // gravity in tiles/frame²
 scroll_x = 0; // X scroll in tiles
 
 // Inputs (see https://xem.github.io/articles/jsgamesinputs.html)
@@ -72,7 +73,7 @@ setInterval(() => {
   hero_grounded = 0;
   
   // Apply gravity to Y speed, Y acceleration to Y speed and Y speed to Y position
-  hero_vy += g;
+  hero_vy += hero_vy<0?g1:g2;
   hero_vy += hero_ay;
   hero_y += hero_vy;
   
